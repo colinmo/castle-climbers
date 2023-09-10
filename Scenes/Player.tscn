@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c5j00wy2rk72v" path="res://Assets/Kings and Pigs/Sprites/01-King Human/Run (78x58).png" id="7_dqaln"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_muqa1"]
+size = Vector2(20, 23)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xfon3"]
 atlas = ExtResource("2_m4nc1")
@@ -277,6 +278,7 @@ animations = [{
 script = ExtResource("1_q4tm5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-7, 1.5)
 shape = SubResource("RectangleShape2D_muqa1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
