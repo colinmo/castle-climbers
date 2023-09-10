@@ -26,12 +26,12 @@ func _physics_process(delta):
 #animations
 func player_animations():
 	#on left (add is_action_just_released so you continue running after jumping)
-	if Input.is_action_pressed("ui_left") || Input.is_action_just_released("ui_jump"):
+	if Input.is_action_pressed("ui_left") && !Global.is_jumping:
 		$AnimatedSprite2D.flip_h = true
 		$AnimatedSprite2D.play("run")
 		$CollisionShape2D.position.x = 7
 	#on right (add is_action_just_released so you continue running after jumping)
-	if Input.is_action_pressed("ui_right") || Input.is_action_just_released("ui_jump"):
+	if Input.is_action_pressed("ui_right") && !Global.is_jumping:
 		$AnimatedSprite2D.flip_h = false
 		$AnimatedSprite2D.play("run")
 		$CollisionShape2D.position.x = -7
@@ -47,6 +47,8 @@ func _input(_event):
 	# Handle Jump.
 	if Input.is_action_just_pressed("ui_jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		$AnimatedSprite2D.play("jump")
+		Global.is_jumping = true
 	# Climbing
 	if Global.is_climbing == true:
 		if Input.is_action_pressed("ui_up"):
@@ -56,6 +58,7 @@ func _input(_event):
 	else:
 		gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 		Global.is_climbing = false
+		Global.is_jumping = false
 
 
 func _on_animated_sprite_2d_animation_finished():

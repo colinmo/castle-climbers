@@ -1,0 +1,105 @@
+[gd_scene load_steps=16 format=3 uid="uid://cfoa7phc55l4g"]
+
+[ext_resource type="Script" path="res://Scripts/Bomb.gd" id="1_lruwf"]
+[ext_resource type="Texture2D" uid="uid://bmi3x00qiohuv" path="res://Assets/Kings and Pigs/Sprites/09-Bomb/Boooooom (52x56).png" id="2_orp5f"]
+[ext_resource type="Texture2D" uid="uid://ccha35pmbi78h" path="res://Assets/Kings and Pigs/Sprites/09-Bomb/Bomb On (52x56).png" id="3_4bk2o"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pnis1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xuiea"]
+atlas = ExtResource("2_orp5f")
+region = Rect2(0, 0, 52, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0s7j"]
+atlas = ExtResource("2_orp5f")
+region = Rect2(52, 0, 52, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_difvs"]
+atlas = ExtResource("2_orp5f")
+region = Rect2(104, 0, 52, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3jnm"]
+atlas = ExtResource("2_orp5f")
+region = Rect2(156, 0, 52, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0o3ux"]
+atlas = ExtResource("2_orp5f")
+region = Rect2(208, 0, 52, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m75x4"]
+atlas = ExtResource("2_orp5f")
+region = Rect2(260, 0, 52, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8vccb"]
+atlas = ExtResource("3_4bk2o")
+region = Rect2(0, 0, 52, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwyr2"]
+atlas = ExtResource("3_4bk2o")
+region = Rect2(52, 0, 52, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7q3d"]
+atlas = ExtResource("3_4bk2o")
+region = Rect2(104, 0, 52, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imsqh"]
+atlas = ExtResource("3_4bk2o")
+region = Rect2(156, 0, 52, 56)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iyc0v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xuiea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h0s7j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_difvs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3jnm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0o3ux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m75x4")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8vccb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gwyr2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7q3d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_imsqh")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}]
+
+[node name="Bomb" type="Area2D"]
+script = ExtResource("1_lruwf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_pnis1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_iyc0v")
+animation = &"explode"
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
